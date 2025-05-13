@@ -930,6 +930,15 @@ class App {
     this._setLocalStorage();
   }
 
+  _updateWorkoutObj(wk, distance, duration, cadence, elevation) {
+    wk.distance = distance;
+    wk.duration = duration;
+    wk.cadence ? (wk.cadence = cadence) : (wk.elevationGain = elevation);
+    wk.pace
+      ? (wk.pace = duration / distance)
+      : (wk.speed = distance / (duration / 60));
+  }
+
   _updateWorkout(wkItem, distance, duration, cadence, elevation) {
     wkItem.querySelector('.workout__value--distance').textContent = distance;
     wkItem.querySelector('.workout__value--duration').textContent = duration;
